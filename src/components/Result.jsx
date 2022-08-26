@@ -11,7 +11,7 @@ const Result = ({ value }) => {
 
 // Validacion del tipo de dato
 Result.propTypes = {
-    value: PropTypes.string
+    value: PropTypes.string.isRequired
 }
 
 export default Result;

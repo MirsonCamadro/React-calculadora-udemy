@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Result = ({ value }) => {
     return (
@@ -7,5 +8,10 @@ const Result = ({ value }) => {
         </div>
     )
 };
+
+// Validacion del tipo de dato
+Result.propTypes = {
+    value: PropTypes.string
+}
 
 export default Result;

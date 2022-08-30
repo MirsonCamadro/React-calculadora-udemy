@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Functions from './components/Functions'
 import Numbers from './components/Numbers'
 import MathOperations from './components/MathOperations'
@@ -7,22 +7,38 @@ import './App.css'
 
 // Función Flecha o Arrow Function
 const App = () => {
+    // Array Destructuring
+    const [stack, setStack] = useState("")
     // Lo que ejecuta la función
     console.log("Renderización de App")
     return (
         <main className='react-calculator'>
-            <Result />
-            <Numbers onClickNumber={number => console.log(number)}/>
+            <Result value={stack}/>
+            <Numbers onClickNumber={number => {
+                setStack(`${stack}${number}`)
+            }}/>
             <Functions 
-                onContentClear={() => console.log("clear")}
-                onDelete={() => console.log("delete")}
+                onContentClear={() => {
+                    setStack('')
+                }}
+                onDelete={() => {
+                    if (stack.length > 0){
+                        const newStack = stack.substring(0, stack.length - 1)
+                        setStack(newStack)
+                    }
+                }}
             />
             <MathOperations 
-                onClickOperation={operation => console.log(operation)}
-                onClickEqual={equal => console.log(equal)}
+                onClickOperation={operation => {
+                    setStack(`${stack}${operation}`)
+                }}
+                onClickEqual={equal => {
+                    setStack(eval(stack).toString())
+                }}
             /> 
         </main>
     )
 }
 
 export default App
+
